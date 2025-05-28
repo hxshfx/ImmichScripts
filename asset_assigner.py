@@ -86,6 +86,7 @@ for folder_name in os.listdir(gallery_dir):
         else:
             album_response = requests.post(f"{immich_url}/api/albums", headers=headers, json={"albumName": folder_name})
             album_id = album_response.json()['id']
+        # END IF
 
 
         ## Assign assets to the album
@@ -95,6 +96,8 @@ for folder_name in os.listdir(gallery_dir):
                 asset_id = asset_lookup[file_name]
                 asset_ids.append(asset_id)
                 added_assets.add(asset_id)
+            # END IF
+        # END FOR
 
 
         ## Retrieve existing assets in the album and filter those assets that are not already in the album
@@ -113,6 +116,7 @@ for folder_name in os.listdir(gallery_dir):
             total_assets_added += len(new_asset_ids)
         else:
             print(f"Album '{folder_name}' already contains all existing assets.")
+        # END IF
 
         total_assets_overall += len(asset_ids)
     # END IF
@@ -133,3 +137,4 @@ print(f"Missing assets ({len(missing_assets)}):")
 missing_asset_names = [name for name, id in asset_lookup.items() if id in missing_assets]
 for asset_name in missing_asset_names:
     print(f"- Name: {asset_name}")
+# END FOR

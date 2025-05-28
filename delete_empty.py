@@ -49,6 +49,7 @@ for album in albums:
             print(f"Successfully deleted empty album with ID: {album_id}")
         else:
             print(f"Failed to delete empty album with ID: {album_id}, Status Code: {delete_response.status_code}")
+        # END IF
     else:
         print(f"Album with ID: {album_id} is not empty, skipping deletion.")
     # END IF
